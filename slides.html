@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Thomas Torsney-Weir">
+  <title>Slicing multi-dimensional spaces</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="theme.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section class="slide center">
+  <h1 class="title">Slicing multi-dimensional spaces</h1>
+  <p class="author">Thomas Torsney-Weir</p>
+  <p class="date">VDA research group, University of Vienna</p>
+</section>
+
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Motivation</li>
+<li>1D slices (manifolds)</li>
+<li>2D slices (shapes)</li>
+<li>rendering time (spheres/interactive time)</li>
+</ul>
+</section>
+
+<section>
+<section id="motivation" class="titleslide slide level1 center">
+  <h1>Motivation</h1>
+</section>
+
+<section id="multi-dimensional-spaces" class="slide level2">
+<h2>Multi-dimensional spaces</h2>
+<ul>
+  <li>Between 3 and 20 dimensions</li>
+  <li>Dimensions have important meaning</li>
+</ul>
+</section>
+
+<section id="multi-dimensional-spaces" class="slide level2">
+<h2>Multi-dimensional spaces</h2>
+<p>Simulations</p>
+<figure>
+<img style="height:500px;" src="images/weather_sim.jpg" />
+</figure>
+</section>
+
+<section id="multi-dimensional-spaces-1" class="slide level2">
+<h2>Multi-dimensional spaces</h2>
+<p>Optimization functions</p>
+<figure>
+<img style="height:500px;" src="images/optim_1.png" />
+</figure>
+</section>
+
+<section id="multi-dimensional-spaces-2" class="slide level2">
+<h2>Multi-dimensional spaces</h2>
+<p>Polytopes</p>
+<figure>
+<img style="height:500px;" src="images/klein_bottle.png" />
+</figure>
+<p><span class="citation">https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Klein_bottle.svg/240px-Klein_bottle.svg.png</span></p>
+</section>
+
+<section id="challenges" class="slide level2">
+<h2>Challenges</h2>
+<p>Grand challenge: visualize more than 2 axes on a 2D screen</p>
+<ul>
+<li>perceptual uniformity</li>
+<li>familiarity</li>
+<li>parameters have meaning</li>
+</ul>
+<figure>
+  <img style="height:300px;" src="images/perception.png" />
+</figure>
+</section>
+
+<section id="why-visualization" class="slide level2">
+<h2>Tasks</h2>
+
+<div class="columns">
+  <div class="column">
+    <h3>Manifolds</h3>
+    <ul>
+      <li>Relationship of independent vs dependent variables</li>
+      <li>Find extrema</li>
+      <li>Type of relationship (e.g. logrithmic)</li>
+      <li>Sensitivity</li>
+    </ul>
+  </div>
+  <div class="column">
+    <h3>Shapes</h3>
+    <ul>
+      <li>Relationship of all variables</li>
+      <li>Type of shape (e.g. donut)</li>
+      <li>Kinks/cusps</li>
+    </ul>
+  </div>
+</div>
+
+<aside class="notes">
+  these are difficult to specify for automatic means
+
+  kinks aren't always hard kinks they may be large changes in the slope
+</aside>
+</section>
+
+<section id="what-is-slicing" class="slide level2">
+<h2>What is slicing?</h2>
+<figure>
+<img src="images/med_slicing.png" />
+</figure>
+<aside class="notes">
+Slicing comes from the medical community which is well-versed in using them
+</aside>
+</section>
+
+<section id="hyperslice" class="slide level2">
+<h2>HyperSlice</h2>
+<figure>
+<img src="images/hs_3d.png" />
+</figure>
+<p><span class="citation" data-cites="Wijk:1993">Wijk, Jarke J. van, and Robert van Liere. “HyperSlice: Visualization of scalar functions of many variables,” 1993..</span></p>
+</section>
+
+<section id="hyperslice-1" class="slide level2">
+<h2>Hyperslice</h2>
+<figure>
+<img src="images/hs_nd.png" />
+</figure>
+<p><span class="citation" data-cites="Wijk:1993">Wijk, Jarke J. van, and Robert van Liere. “HyperSlice: Visualization of scalar functions of many variables,” 1993..</span></p>
+</section>
+
+<section id="advantages-of-slicing" class="slide level2">
+<h2>Advantages of slicing</h2>
+<ul>
+<li>Distances are preserved</li>
+<li>Easy to understand</li>
+<li>Most important factors on most effective encodings</li>
+</ul>
+<aside class="notes">
+<p>distances and proportions are important in medical visualization</p>
+ease is in opposition to things like topology
+</aside>
+</section>
+
+<section id="requirements-of-slicing" class="slide level2">
+<h2>Requirements of slicing</h2>
+<ul>
+<li>Focus point selection (interactive)</li>
+<li>Speed (10fps)</li>
+<li>How to perform the slicing?</li>
+</ul>
+</section>
+
+<section id="what-ive-done" class="slide level2">
+<h2>What I've done</h2>
+<ul>
+<li>developed the taxonomy of manifold vs shape analysis</li>
+<li>using 1D slices for understanding manifolds</li>
+<li>using 2D slices for understanding shapes</li>
+<li>how regular geometry can be taken advantage to create fast slicing</li>
+</ul>
+</section></section>
+<section>
+
+<section id="d-slices" class="titleslide slide center level1"><h1>1D slices</h1></section>
+
+<section id="motivation-1" class="slide level2">
+<h2>Motivation</h2>
+<p>Looking at manifolds</p>
+<ul>
+<li>Simulations</li>
+<li>Mathematical functions</li>
+</ul>
+</section>
+
+<section id="boston-housing-prices" class="slide level2">
+<h2>Boston housing prices</h2>
+<div class="columns">
+<div class="column">
+<img src="images/boston_housing.png" />
+</div>
+<div class="column">
+<ol>
+<li> What's the most expensive house?  </li>
+<li> What factors contribute the most to changes in price?  </li>
+<li> How does home price chane with safety?  </li>
+<li> Is the relationship logrithmic/linear/etc?  </li>
+</ol>
+</div>
+</div>
+
+<aside class="notes">
+Motivating example
+</aside>
+</section>
+
+<section id="building-a-machine-learning-model" class="slide level2">
+<h2>Building a machine learning model</h2>
+<figure>
+<img src="images/ml_pipeline.svg" />
+</figure>
+<aside class="notes">
+Used the UCI housing dataset, 13 factors
+</aside>
+</section>
+
+<section id="function-plots" class="slide level2">
+<h2>Function plots</h2>
+<figure>
+  <img src="images/function_plot.png" />
+</figure>
+</section>
+
+<section id="multi-d-example" class="slide level2">
+<h2>Multi-D example</h2>
+<figure>
+  <img src="images/slice_howto_1.png" />
+</figure>
+</section>
+
+<section id="multi-d-example" class="slide level2">
+<h2>Multi-D example</h2>
+<figure>
+  <img src="images/slice_howto_2.png" />
+</figure>
+</section>
+
+<section id="boston-housing-example" class="slide level2">
+<h2>Boston housing example</h2>
+<figure>
+<img src="images/sliceplorer_full.png" />
+</figure>
+<aside class="notes">
+Each chart is one factor, the value of the factor is on the x-axis and the function value is on the y-axis
+</aside>
+</section>
+
+<section id="questions" class="slide level2">
+<h2>Questions</h2>
+<ol>
+<li>
+What's the most expensive house?
+</li>
+<li>
+What factors contribute the most to changes in price?
+</li>
+<li>
+How does home price chane with safety?
+</li>
+<li>
+Is the relationship logrithmic/linear/etc?
+</li>
+</ol>
+</section>
+
+<section id="most-expensive-house" class="slide level2">
+<h2>Most expensive house</h2>
+
+<figure>
+  <img src="images/exp_house.png" />
+</figure>
+</section>
+
+<section id="what-factors-contribute-to-changes-in-price" class="slide level2">
+<h2>What factors contribute to changes in price?</h2>
+
+<figure>
+  <img src="images/price_changes.png" />
+</figure>
+</section>
+
+<section id="home-price-changes-with-safety" class="slide level2">
+<h2>Home price changes with safety</h2>
+
+<figure>
+  <img src="images/safety.png" />
+</figure>
+<aside class="notes">
+2 ways of looking at safety
+</aside>
+</section>
+
+<section id="is-the-relationship-logrithmiclinearetc" class="slide level2">
+<h2>Is the relationship logrithmic/linear/etc?</h2>
+
+<figure>
+  <img src="images/relationship.png" />
+</figure>
+</section>
+
+<section id="model-comparison" class="slide level2">
+<h2>Model comparison</h2>
+<div class="columns">
+<div class="column">
+<figure>
+<img style="height: 170px" src="images/sp1.png" />
+<figcaption>
+Single layer NN (26 nodes)
+</figcaption>
+</figure>
+<figure>
+<img style="height: 170px" src="images/sp2.png" />
+<figcaption>
+SVM (polynomial kernel)
+</figcaption>
+</figure>
+</div>
+<div class="column">
+<figure>
+<img style="height: 170px" src="images/sp3.png" />
+<figcaption>
+Dual layer NN (5 and 3 nodes)
+</figcaption>
+</figure>
+<figure>
+<img style="height: 170px" src="images/sp4.png" />
+<figcaption>
+SVM (RBF kernel)
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<section id="major-contributions" class="slide level2">
+<h2>contributions</h2>
+<ul>
+<li>Introduced 1D slices</li>
+<li>Developed analysis tasks for examining manifolds</li>
+<li>Applied slices to new areas like model comparison</li>
+</ul>
+</section></section>
+<section>
+
+<section id="d-slices-1" class="titleslide slide center level1">
+  <h1>2D slices</h1>
+</section>
+
+<section id="motivation-2" class="slide level2">
+<h2>Motivation</h2>
+<p>Looking at shapes</p>
+<ul>
+<li>Pareto fronts</li>
+<li>Polytopes</li>
+<li>Function spaces</li>
+</ul>
+</section>
+
+<section id="algorithm" class="slide level2">
+<h2>Algorithm</h2>
+<ol type="1">
+<li>Input vertices</li>
+<li>Compute the convex hull (<span class="math inline">\((d-1)\)</span>-dimensional simplices)</li>
+<li>Generate <span class="math inline">\(m\)</span> <span class="math inline">\(d\)</span>-dimensional focus points</li>
+<li>For each 2D plane, focus point, and simplex compute the intersection between the plane and the <span class="math inline">\((d-1)\)</span>-dimensional simplex</li>
+<li>Draw each intersection line for each focus point in a SPLOM layout</li>
+</ol>
+<aside class="notes">
+step 4 is the important one and it's also the contribution here
+</aside>
+</section>
+
+<section id="focus-point-intersection" class="slide level2">
+<h2>Focus point intersection</h2>
+<ul>
+<li>a 2D plane only has a well-defined normal in 3D space</li>
+<li>
+  we could also define the 2D plane as a focus point with 2 free variables 
+  <span style="font-size: 84px;" class="math display">\[ \left[ x_1, x_2, 0.23, 0.75, \ldots, 0.43 \right]^T \]</span>
+</li>
+<li>How to compute where this intersects the simplex?</li>
+</ul>
+</section>
+
+<section id="focus-point-intersection-1" class="slide level2">
+<h2>Focus point intersection</h2>
+
+<div class="columns">
+  <div class="column">
+    <img src="images/mesh-slicing.png" />
+  </div>
+  <div class="column">
+    <img src="images/simplex-slicing.png" />
+  </div>
+  <div class="column">
+    <img src="images/plane-slicing.png" />
+  </div>
+</div>
+
+</section>
+
+<section id="visualization" class="slide level2">
+<h2>Visualization</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>
+Project all focus points down at once
+</li>
+<li>
+Linked selection
+</li>
+</ul>
+</div>
+<div class="column">
+<video controls>
+  <source src="movies/hsp_interaction.mov">
+</video>
+</div>
+</div>
+</section>
+
+<section id="results" class="slide level2">
+<h2>Results</h2>
+<ul>
+<li>Pareto fronts</li>
+<li>Regular polytopes</li>
+<li>Function spaces</li>
+</ul>
+</section>
+
+<section id="pareto-fronts" class="slide level2">
+<h2>Pareto fronts</h2>
+
+<figure>
+  <img src="images/hsp_dltz1_5.png" />
+</figure>
+</section>
+
+<section id="regular-polytopes" class="slide level2">
+<h2>Regular polytopes</h2>
+
+<div class="columns">
+  <div class="column">
+    <h3>Hypercube</h3>
+    <figure>
+      <img src="images/hsp_4cube.png" />
+    </figure>
+  </div>
+  <div class="column">
+    <h3>4D sphere</h3>
+    <figure>
+      <img src="images/hsp_sphere_4d.png" />
+    </figure>
+  </div>
+  <div class="column">
+    <h3>Octohedron</h3>
+    <figure>
+      <img src="images/hsp_octo-global.png" />
+    </figure>
+  </div>
+</div>
+
+</section>
+
+<section id="function-spaces" class="slide level2">
+<h2>Function spaces</h2>
+
+<div class="columns">
+  <div class="column">
+    <h3>Global view</h3>
+    <figure>
+      <img src="images/hsp_d5f1_4-global.png" />
+    </figure>
+  </div>
+  <div class="column">
+    <h3>Local view</h3>
+    <figure>
+      <img src="images/hsp_d5f1_4-local.png" />
+    </figure>
+  </div>
+</div>
+</section>
+
+<section id="major-contributions-1" class="slide level2">
+<h2>contributions</h2>
+<ul>
+<li>Algorithm to produce 2D slices of polytopes</li>
+<li>Using projections of 2D slices instead of interactive focus point browsing</li>
+<li>Tasks for understanding shapes</li>
+</ul>
+</section></section>
+<section>
+
+<section id="fast-slices-spheres" class="titleslide slide center level1"><h1>Fast slices (spheres)</h1></section>
+
+<section id="interactive-rendering-time" class="slide level2">
+<h2>Interactive rendering time</h2>
+<div class="columns">
+<div class="column">
+<h3> 3fps </h3>
+<video controls>
+  <source src="movies/3fps_slicing.mov">
+</video>
+</div>
+<div class="column">
+<h3> 30fps </h3>
+<video controls>
+  <source src="movies/30fps_slicing.mov">
+</video>
+</div>
+</div>
+<aside class="notes">
+Question is how do we keep the rendering time fast
+</aside>
+</section>
+
+<section id="questions-1" class="slide level2">
+<h2>Questions</h2>
+<ul>
+<li>How do we avoid slow rendering time?</li>
+<li>How many points?</li>
+</ul>
+</section>
+
+<section id="slicing-spheres" class="slide level2">
+<h2>Slicing spheres</h2>
+<div class="columns">
+<div class="column">
+<h3> 2D </h3>
+<p><img src="images/gp_diagram_2d.png" /></p>
+</div>
+<div class="column">
+<h3> 3D </h3>
+<p><img src="images/gp_diagram_3d.png" /></p>
+</div>
+</div>
+<aside class="notes">
+Gaussian process model is a popular multi-D regression model
+</aside>
+</section>
+
+<section id="algorithm-1" class="slide level2">
+<h2>Algorithm</h2>
+<div class="columns">
+<div class="column">
+<p><img src="images/gp_diagram_2d.png" /></p>
+</div>
+<div class="column">
+<ol>
+<li>
+Filter points that fall out of range of the slice
+</li>
+<li>
+Render the portion of each sphere that is sliced
+</li>
+</ol>
+</div>
+</div>
+</section>
+
+<section id="gpu-implementation" class="slide level2">
+<h2>GPU implementation</h2>
+<figure>
+<img src="images/gpu_pipeline.png" />
+</figure>
+<aside class="notes">
+GPUs are fast, let's use them!
+</aside>
+</section>
+
+<section id="predicting-rendering-time" class="slide level2">
+<h2>Predicting rendering time</h2>
+
+<figure>
+<img src="images/rendering_time_table.png" />
+</figure>
+</section>
+
+<section id="results-1" class="slide level2">
+<h2>Results</h2>
+<figure>
+  <img src="images/timing_prediction.png" />
+</figure>
+</section>
+
+<section id="results-1" class="slide level2">
+<h2>Results</h2>
+<figure>
+  <img src="images/rt_pred_error.png" />
+</figure>
+</section>
+
+<section id="major-contributions-2" class="slide level2">
+<h2>contributions</h2>
+<ul>
+<li>How to use regular geometry to make slicing fast</li>
+<li>Prediction algorithm and calibration method for slicing fast</li>
+</ul>
+</section></section>
+<section>
+
+<section id="conclusion" class="titleslide slide center level1">
+  <h1>Conclusion</h1>
+</section>
+
+<section id="contributions" class="slide level2">
+<h2>Contributions</h2>
+<ul>
+<li>developed the taxonomy of manifold vs shape analysis</li>
+<li>using 1D slices for understanding manifolds</li>
+<li>using 2D slices for understanding shapes</li>
+<li>how regular geometry can be taken advantage to create fast slicing</li>
+</ul>
+</section>
+
+<section id="thanks" class="slide level2">
+<h2>Thanks!</h2>
+<p>thomas.torsney-weir@univie.ac.at</p>
+</section>
+
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+        center: false,
+        transition: 'none',
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

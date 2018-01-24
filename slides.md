@@ -4,11 +4,11 @@
 
 ## Outline
 
-* motivation
+* Motivation
 * 1D slices (manifolds)
 * 2D slices (shapes)
 * rendering time (spheres/interactive time)
-* wrap up
+* Wrap up
 
 # Motivation
 
@@ -16,17 +16,27 @@
 
 Simulations
 
+![](images/weather_sim.jpg)
+
 ## Multi-dimensional spaces
 
 Optimization functions
+
+![](images/optim_1.png)
 
 ## Multi-dimensional spaces
 
 Polytopes
 
+![](images/klein_bottle.png)
+
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Klein_bottle.svg/240px-Klein_bottle.svg.png
+
 ## Multi-dimensional spaces
 
 Pareto fronts
+
+![](images/pareto_front.png)
 
 ## Challenges
 
@@ -35,6 +45,8 @@ Grand challenge: visualize more than 2 axes on a 2D screen
 * perceptual uniformity
 * familiarity
 * parameters have meaning
+
+![](images/perception.pdf)
 
 ## Why visualization?
 
@@ -63,11 +75,19 @@ Slicing comes from the medical community which is well-versed in using them
 ## Advantages of slicing
 
 * Distances are preserved
+* Easy to understand
+* Most important factors on most effective encodings
+
+<aside class="notes">
+distances and proportions are important in medical visualization
+
+ease is in opposition to things like topology
+</aside>
 
 ## Requirements of slicing
 
 * Focus point selection (interactive)
-* Speed
+* Speed (10fps)
 * How to perform the slicing?
 
 ## What I've done
@@ -90,7 +110,7 @@ Looking at manifolds
 
 <div class="columns">
 <div class="column">
-boston housing image
+<img src="images/boston_housing.png" />
 <div>
 <div class="column">
 <ol>
@@ -101,11 +121,14 @@ boston housing image
 </ol>
 <div>
 </div>
-Motivating example
 
-Show questions
+<aside class="notes">
+Motivating example
+</aside>
 
 ## Building a machine learning model
+
+![](images/ml_pipeline.png)
 
 <aside class="notes">
 Used the UCI housing dataset, 13 factors
@@ -117,8 +140,12 @@ Used the UCI housing dataset, 13 factors
 
 ## Boston housing example
 
+![](images/sliceplorer_full.png)
+
+<aside class="notes">
 Each chart is one factor, the value of the factor is on the x-axis and the
 function value is on the y-axis
+</aside>
 
 ## Questions
 
@@ -142,6 +169,29 @@ function value is on the y-axis
 ## Is the relationship logrithmic/linear/etc?
 
 ## Model comparison
+
+<div class="columns">
+<div class="column">
+<figure>
+<img style="height: 170px" src="images/sp1.png" />
+<figcaption>Single layer NN (26 nodes)</figcaption>
+</figure>
+<figure>
+<img style="height: 170px" src="images/sp2.png" />
+<figcaption>SVM (polynomial kernel)</figcaption>
+</figure>
+</div>
+<div class="column">
+<figure>
+<img style="height: 170px" src="images/sp3.png" />
+<figcaption>Dual layer NN (5 and 3 nodes)</figcaption>
+</figure>
+<figure>
+<img style="height: 170px" src="images/sp4.png" />
+<figcaption>SVM (RBF kernel)</figcaption>
+</figure>
+</div>
+</div>
 
 ## Major contributions
 
@@ -177,7 +227,7 @@ step 4 is the important one and it's also the contribution here
 * a 2D plane only has a well-defined normal in 3D space
 * we could also define the 2D plane as a focus point with 2 free variables
   $$
-  \left[ x_1 x_2 0.23 0.75 \ldots 0.43 \right]
+  \left[ x_1, x_2, 0.23, 0.75, \ldots, 0.43 \right]^T
   $$
 * How to compute where this intersects the simplex?
 
@@ -222,7 +272,16 @@ movie of linked selection
 
 ## Interactive rendering time
 
-3 vs 30 fps movies
+<div class="columns">
+<div class="column">
+<h3>3fps</h3>
+movie
+</div>
+<div class="column">
+<h3>30fps</h3>
+movie
+</div>
+</div>
 
 <aside class="notes">
 Question is how do we keep the rendering time fast
@@ -235,9 +294,20 @@ Question is how do we keep the rendering time fast
 
 ## Slicing spheres
 
-* Gaussian process model is a popular multi-D regression model
+<div class="columns">
+<div class="column">
+<h3>2D</h3>
+<img src="images/gp_diagram_2d.png" />
+</div>
+<div class="column">
+<h3>3D</h3>
+<img src="images/gp_diagram_3d.png" />
+</div>
+</div>
 
-2D and 3D images
+<aside class="notes">
+Gaussian process model is a popular multi-D regression model
+</aside>
 
 ## Algorithm
 

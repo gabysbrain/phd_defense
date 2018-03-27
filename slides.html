@@ -51,10 +51,26 @@
 
 <section id="multi-dimensional-spaces" class="slide level2">
 <h2>Multi-dimensional spaces</h2>
-<ul>
-  <li>Between 3 and 20 dimensions</li>
-  <li>Dimensions have important meaning</li>
-</ul>
+
+<p>Grand challenge: visualize more than 2 axes on a 2D screen</p>
+<div class="columns">
+  <div class="column">
+    <ul>
+      <li>Between 3 and 20 dimensions</li>
+      <li>Dimensions have important meaning</li>
+    </ul>
+  </div>
+  <div class="column">
+    <ul>
+    <li>perceptual uniformity</li>
+    <li>familiarity</li>
+    <li>parameters have meaning</li>
+    </ul>
+    <figure>
+      <img style="height:280px;" src="images/perception.png" />
+    </figure>
+  </div>
+</div>
 </section>
 
 <section id="multi-dimensional-spaces" class="slide level2">
@@ -82,17 +98,18 @@
 <p><span class="citation">https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Klein_bottle.svg/240px-Klein_bottle.svg.png</span></p>
 </section>
 
-<section id="challenges" class="slide level2">
-<h2>Challenges</h2>
-<p>Grand challenge: visualize more than 2 axes on a 2D screen</p>
-<ul>
-<li>perceptual uniformity</li>
-<li>familiarity</li>
-<li>parameters have meaning</li>
-</ul>
-<figure>
-  <img style="height:300px;" src="images/perception.png" />
-</figure>
+<section class="slide level2">
+  <h2>Goals</h2>
+  <ul>
+    <li>Comprehensive approach</li>
+    <li>Are there commonalities in how we can analyze these datasets?</li>
+    <li>Use these tasks to develop and evaluate new visualization tools</li>
+  </ul>
+  <aside class="notes">
+    Most methods prior to this have looked at a specific application domain.
+    There's been lots of work on developing this for discrete data, but not
+    for continuous data.
+  </aside>
 </section>
 
 <section id="why-visualization" class="slide level2">
@@ -176,10 +193,10 @@ ease is in opposition to things like topology
 <section id="what-ive-done" class="slide level2">
 <h2>What I've done</h2>
 <ul>
-<li>developed the taxonomy of manifold vs shape analysis</li>
-<li>using 1D slices for understanding manifolds</li>
-<li>using 2D slices for understanding shapes</li>
-<li>how regular geometry can be taken advantage to create fast slicing</li>
+<li>Developed the taxonomy of manifold vs shape analysis</li>
+<li>Using 1D slices for understanding manifolds</li>
+<li>Using 2D slices for understanding shapes</li>
+<li>Advantage of using regular geometry to create fast slicing</li>
 </ul>
 </section></section>
 <section>
@@ -205,7 +222,7 @@ ease is in opposition to things like topology
 <ol>
 <li> What's the most expensive house?  </li>
 <li> What factors contribute the most to changes in price?  </li>
-<li> How does home price chane with safety?  </li>
+<li> How does home price change with safety?  </li>
 <li> Is the relationship logrithmic/linear/etc?  </li>
 </ol>
 </div>
@@ -267,7 +284,7 @@ What's the most expensive house?
 What factors contribute the most to changes in price?
 </li>
 <li>
-How does home price chane with safety?
+How does home price change with safety?
 </li>
 <li>
 Is the relationship logrithmic/linear/etc?
@@ -393,6 +410,13 @@ step 4 is the important one and it's also the contribution here
 <li>How to compute where this intersects the simplex?</li>
 </ul>
 </section>
+
+<!--
+<section id="focus-point-intersection" class="slide level2">
+<h2>Focus point intersection</h2>
+<p>How does focus point/plane actually intersect?</p>
+</section>
+-->
 
 <section id="focus-point-intersection-1" class="slide level2">
 <h2>Focus point intersection</h2>
@@ -624,6 +648,22 @@ GPUs are fast, let's use them!
 <li>using 2D slices for understanding shapes</li>
 <li>how regular geometry can be taken advantage to create fast slicing</li>
 </ul>
+</section>
+
+<section id="future" class="slide level2">
+<h2>Future work</h2>
+<p>
+  Elevate continuous multi-dimensional analysis to the 
+  same level as discrete data
+</p>
+<ul>
+<li>Further develop the task taxonomy</li>
+<li>Multi-D slice interaction</li>
+</ul>
+<aside class="notes">
+  Given the prevalence of multi-D continuous applications it's important to 
+  extend the visualization focus to it
+</aside>
 </section>
 
 <section id="thanks" class="slide level2">

@@ -1,18 +1,24 @@
 
-PANDOC:=pandoc -t revealjs \
-	             --variable slideNumber="'c/t'" \
-	             --variable transition="'none'" \
-	             --filter pandoc-citeproc --csl inline.csl \
-							 --bibliography /home/tom/Dropbox/Papers/all.bib \
-							 --mathjax -s 
+BIB := /home/tom/Sync/Papers/all.bib
+PANDOC := pandoc
 
-.PHONY: all
+#DOTSRC := $(shell ls *.dot)
+#DOTTGT := $(DOTSRC:%.dot=images/%.svg)
 
-all: slides.html theme.css
+#all: $(DOTTGT)
+all: theme.css slides.html
 
 slides.html: slides.md
-	$(PANDOC) -o $@ $<
+	$(PANDOC) -t html5 --template=template-revealjs.html \
+	  --standalone \
+		--section-divs \
+		-o $@ \
+		-s $<
 
 theme.css: theme.scss
 	sass $<:$@
+
+images/%.svg: %.dot
+	dot -Tsvg -Grankdir=LR $< -o $@
+	#dot -Tsvg -Gdpi=100 -Gsize=9,15 -Grankdir=LR $< -o $@
 

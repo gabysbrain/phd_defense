@@ -77,7 +77,7 @@ HyperSlice extended this to abstract objects
 
 ## Hyperslice
 
-$\sum_{i=0}^3 \frac{w_i}{1+ |x-p_i|^2}$
+![](images/hs_4dfunction.png)
 
 ![](images/hs_nd.png)
 
@@ -287,16 +287,97 @@ Let's look at these in turn
 
 ## Functional description
 
-$f(x_1, x_2, x_3, x_4, x_5) \rightarrow \textrm{scalar}$
+$f(x_1, x_2, x_3, x_4, x_5) \rightarrow y$
+
+$f(x_1, 0.2, 0.5, 1.2, 17.8) \rightarrow y$
+
+![](images/1d_function.png)
+
+## Functional description
+
+![](images/2_slicing.png)
 
 ## Doing this fast
+
+<div class="columns">
+<div class="column">
+<h3> 3fps </h3>
+<video controls>
+  <source src="movies/3fps_slicing.mov">
+</video>
+</div>
+<div class="column">
+<h3> 30fps </h3>
+<video controls>
+  <source src="movies/30fps_slicing.mov">
+</video>
+</div>
+</div>
 
 <aside class="notes">
 The idea is that if we know the functional form then we can speed up 
 the rendering process.
 </aside>
 
+## Doing this fast
+
+$\sum_i c_i f_i(x)$
+
+![](images/fast_gp1.png)
+
+## Doing this fast
+
+<div class="columns">
+<div class="column">
+<ol>
+<li>Filter out all points that don't fall in range of the slice</li>
+<li>Render the portion of the spherical kernel that is sliced</li>
+</ol>
+</div>
+<div class="column">
+<figure>
+<img src="images/fast_gp2.png" />
+</figure>
+</div>
+</div>
+
+## Doing this fast
+
+![](images/rendering_time_table.png)
+
+## Doing this fast
+
+![](images/gpu_pipeline.png)
+
+## Results
+
+![](images/timing_prediction.png)
+
 ## Simplical mesh
+
+<div class="columns">
+<div class="column">
+<img src="images/mesh-slicing.png" />
+</div>
+<div class="column">
+<img src="images/simplex-slicing.png" />
+</div>
+<div class="column">
+<img src="images/plane-slicing.png" />
+</div>
+</div>
+
+<aside class="notes">
+Describe the outline of the algorithm
+</aside>
+
+## Simplical mesh
+
+![](images/simplex_fp1.png)
+
+## Simplical mesh
+
+![](images/simplex_fp2.png)
 
 # Projections of slices
 
@@ -315,13 +396,17 @@ Sections 2.3.3 and 3.3 of the thesis
 
 Let the user interact
 
-embed movie
+<video controls>
+  <source src="movies/30fps_slicing.mov">
+</video>
 
 <aside class="notes">
 The problem is that this is a local view and the user can get easily lost!
 </aside>
 
 ## Focus point sampling
+
+![](images/sample_slicing.png)
 
 ## Interactive viewers
 
@@ -331,17 +416,29 @@ The problem is that this is a local view and the user can get easily lost!
 
 ## Linked highlighting
 
-Movies/pictures here
+<div class="columns">
+<div class="column">
+<figure>
+<img src="images/sp_linked.png" />
+</figure>
+</div>
+<div class="column">
+<video controls>
+  <source src="movies/hsp_interaction.mov">
+</video>
+</div>
+</div>
 
 ## Individual slice selection
 
-Video?
-Local view of hypersliceplorer here
+<video controls>
+  <source src="movies/hsp_interaction.mov#t=45">
+</video>
 
-## Adding additional slices
-
-Video?
-Some sort of photo here too...
+<aside class="notes">
+If we click on a particular slice we can switch to a local view. 
+The user can also add additional points
+</aside>
 
 # The future
 
@@ -359,7 +456,18 @@ Sections 5.1 and 5.2 of the thesis
 ## Where do we go from here?
 
 * Dissemination of results
-* ???
+* Developing more applications
+
+## Dissemination of results
+
+* Slicing library for Python, R, etc
+* Sliceplorer
+* Hypersliceplor 
+* Hyperslice
+
+## More applications
+
+* Design studies to understand domain tasks
 
 # Conclusion
 
@@ -393,5 +501,21 @@ Sections 5.1 and 5.2 of the thesis
   </div>
 </div>
 
+# Extra slides
+
+## Power management
+
+<div class="columns">
+<div class="column">
+<figure>
+<img src="images/no_pm_running.png" />
+</figure>
+</div>
+<div class="column">
+<figure>
+<img src="images/pm_running.png" />
+</figure>
+</div>
+</div>
 
 

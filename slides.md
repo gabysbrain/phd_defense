@@ -5,16 +5,83 @@ author: Thomas Torsney-Weir
 
 ## Multi-dimensional spaces?
 
-* Domain areas
-* Why visualization?
-* Issues of visualization
-* Related methods
+<div class="columns">
+<div class="column">
+<p style="text-align:center;">Simulations</p>
+<figure>
+  <img style="height:200px;" src="images/weather_sim.jpg" />
+</figure>
+</div>
+<div class="column">
+<p style="text-align:center;">Optimization functions</p>
+<figure>
+  <img style="height:200px;" src="images/optim_1.png" />
+</figure>
+</div>
+<div class="column">
+<p style="text-align:center;">Polytopes</p>
+<figure>
+<img style="height:200px;" src="images/klein_bottle.png" />
+</figure>
+<p><span class="citation">https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Klein_bottle.svg/240px-Klein_bottle.svg.png</span></p>
+</div>
+</div>
+
+## Characteristics
+
+* Dimensions greater than 3
+* Domain and range are continuous
+* Dimensions are meaningful
 
 ## Slicing
 
-* What is slicing?
-* Advanatages of slicing
-* What is missing from HyperSlice?
+<div class="columns">
+<div class="column">
+<ul>
+<li>Easy to understand metaphor</li>
+<li>reduces data from 3D to 2D</li>
+<li>Distances are preserved</li>
+<li>Most important factors on most effective encodings</li>
+</ul>
+</div>
+<div class="column">
+<figure>
+  <img src="images/brain_slice.png" />
+</figure>
+</div>
+</div>
+
+<aside class="notes">
+<p>distances and proportions are important in medical visualization</p>
+ease is in opposition to things like topology
+</aside>
+
+## Slicing in 3D
+
+![](images/med_slicing.png)
+
+<aside class="notes">
+Slicing comes from the medical community which is well-versed in using them
+talk about each pair of dimensions
+</aside>
+
+## Hyperslice
+
+![](images/hs_3d.png)
+
+[@Wijk:1993]
+
+<aside class="notes">
+HyperSlice extended this to abstract objects
+</aside>
+
+## Hyperslice
+
+$\sum_{i=0}^3 \frac{w_i}{1+ |x-p_i|^2}$
+
+![](images/hs_nd.png)
+
+[@Wijk:1993]
 
 ## Outline of the thesis
 
@@ -47,6 +114,8 @@ that I developed
 
 # Continuous multi-D tasks
 
+-----
+
 Section 2.4 of the thesis
 
 ### Outline
@@ -65,6 +134,24 @@ Section 2.4 of the thesis
 ## Discrete data
 
 Many task hierarchies for discrete data
+
+<table>
+<tr>
+<td>Amar, Eagan, and Stasko</td>
+<td>Low-level components of analytic activity in information visualization</td>
+<td>2005</td>
+</tr>
+<tr>
+<td>Shneiderman</td>
+<td>The eyes have it: A task taxonomy for information visualizations</td>
+<td>1996</td>
+</tr>
+<tr>
+<td>Brehmer and Munzner</td>
+<td>A multi-level typology of abstract visualization tasks</td>
+<td>2013</td>
+</tr>
+</table>
 
 <aside class="notes">
 There are none for continuous data! These task taxonomies focus on single 
@@ -97,9 +184,83 @@ Explain the table, techniques, colors, where they come from
 
 ## Example 1: Find extremum
 
-## Example 2: ???
+<div class="columns">
+<div class="column">
+<h3>Discrete</h3>
+<p style="font-size: small; text-align: center;">
+  "Find data cases possessing an extreme value of an attribute over 
+  its range within the data set"
+</p>
+<figure>
+  <img src="images/extremum_discrete.png" />
+</figure>
+</div>
+<div class="column">
+<h3>Continuous</h3>
+<p style="font-size: small; text-align: center;">
+  Find local/global minima/maxima
+</p>
+<figure>
+  <img src="images/extremum_continuous.png" />
+</figure>
+</div>
+</div>
+
+## Find extremum
+
+![](images/gerber_extremum.png)
+
+[@Gerber:2010]
+
+## Find extremum
+
+![](images/sp_extremum.png)
+
+## Example 2: Characterize distribution
+
+<div class="columns">
+<div class="column">
+<h3>Discrete</h3>
+<p style="font-size: small; text-align: center;">
+  "Given a set of data cases and a quantitative attribute of interest, 
+  characterize the distribution of that attribute's values over the set"
+</p>
+<figure>
+  <img src="images/dist_discrete.png" />
+</figure>
+</div>
+<div class="column">
+<h3>Continuous</h3>
+<p style="font-size: small; text-align: center;">
+  What shapes do the manifolds have?
+</p>
+<figure>
+  <img src="images/dist_continuous.png" />
+</figure>
+</div>
+</div>
+
+## Characterize distribution
+
+![](images/distribution_hs.png)
+
+[@Wijk:1993]
+
+## Characterize distribution
+
+![](images/distribution_hs2.png)
+
+## Characterize distribution
+
+![](images/distribution_sp.png)
+
+## Characterize distribution
+
+![](images/distribution_sp2.png)
 
 # Computing slices
+
+-----
 
 Sections 3.3 and 4.4 of the thesis
 
@@ -139,6 +300,8 @@ the rendering process.
 
 # Projections of slices
 
+-----
+
 Sections 2.3.3 and 3.3 of the thesis
 
 ### Outline
@@ -150,7 +313,13 @@ Sections 2.3.3 and 3.3 of the thesis
 
 ## How to choose the focus point?
 
-## Local vs Global view
+Let the user interact
+
+embed movie
+
+<aside class="notes">
+The problem is that this is a local view and the user can get easily lost!
+</aside>
 
 ## Focus point sampling
 
@@ -176,6 +345,8 @@ Some sort of photo here too...
 
 # The future
 
+-----
+
 Sections 5.1 and 5.2 of the thesis
 
 ### Outline
@@ -191,6 +362,8 @@ Sections 5.1 and 5.2 of the thesis
 * ???
 
 # Conclusion
+
+-----
 
 ## Outline for the talk
 

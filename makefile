@@ -10,10 +10,10 @@ PANDOC := pandoc
 #all: $(DOTTGT)
 all: theme.css slides.html
 
-slides.html: slides.md
-	$(PANDOC) -t html5 --template=template-revealjs.html \
+slides.html: slides.md template-revealjs.html
+	#$(PANDOC) -t revealjs \
+	$(PANDOC) -t html5 --template=template-revealjs.html --section-divs \
 	  --standalone \
-		--section-divs \
 		--mathjax \
     --filter pandoc-citeproc --csl inline.csl \
     --bibliography $(BIB) \

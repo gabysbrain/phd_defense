@@ -26,6 +26,7 @@ $else$
   <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 $endif$
 
+<script src='node_modules/jquery/dist/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <!-- If the query includes 'print-pdf', use the PDF print sheet -->
@@ -71,27 +72,18 @@ $if(toc)$
 $endif$
 
 $body$
+
 </div>
+</div>
+
+<script>
+  jQuery('section').addClass('slide');
+</script>
 
 <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
 
-
-<!--<script>-->
-  <!--jQuery('section').removeAttr('id');-->
-  <!--jQuery('section[target]')-->
-    <!--.map(function(i, el) { -->
-      <!--jQuery(el).find(el.attributes.target.value)-->
-        <!--.map(function() {  -->
-          <!--jQuery(this).addClass('fragment ' + el.attributes.fragment.value) -->
-        <!--}); -->
-    <!--});-->
-  <!--jQuery('section[bg_color]')-->
-    <!--.map(function(i, el) { -->
-      <!--jQuery(el).attr('data-background', el.attributes.bg_color.value);-->
-    <!--});-->
-<!--</script>-->
 
 <script>
   // Full list of configuration options available here:

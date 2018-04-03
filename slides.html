@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Thomas Torsney-Weir">
+  <title>Slicing multi-dimensional spaces</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="theme.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section class="center">
+  <h1 class="title">Slicing multi-dimensional spaces</h1>
+  <p class="author">Thomas Torsney-Weir</p>
+</section>
+
+<section id="multi-dimensional-spaces" class="slide level2">
+<h2>Multi-dimensional spaces?</h2>
+<div class="columns">
+<div class="column">
+<p style="text-align:center;">
+Simulations
+</p>
+<figure>
+<img style="height:200px;" src="images/weather_sim.jpg" />
+</figure>
+</div>
+<div class="column">
+<p style="text-align:center;">
+Optimization functions
+</p>
+<figure>
+<img style="height:200px;" src="images/optim_1.png" />
+</figure>
+</div>
+<div class="column">
+<p style="text-align:center;">
+Polytopes
+</p>
+<figure>
+<img style="height:200px;" src="images/klein_bottle.png" />
+</figure>
+<p>
+<span class="citation">https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Klein_bottle.svg/240px-Klein_bottle.svg.png</span>
+</p>
+</div>
+</div>
+</section>
+<section id="characteristics" class="slide level2">
+<h2>Characteristics</h2>
+<ul>
+<li>Dimensions greater than 3</li>
+<li>Domain and range are continuous</li>
+<li>Dimensions are meaningful</li>
+</ul>
+</section>
+<section id="slicing" class="slide level2">
+<h2>Slicing</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>
+Easy to understand metaphor
+</li>
+<li>
+reduces data from 3D to 2D
+</li>
+<li>
+Distances are preserved
+</li>
+<li>
+Most important factors on most effective encodings
+</li>
+</ul>
+</div>
+<div class="column">
+<figure>
+<img src="images/brain_slice.png" />
+</figure>
+</div>
+</div>
+<aside class="notes">
+<p>
+distances and proportions are important in medical visualization
+</p>
+ease is in opposition to things like topology
+</aside>
+</section>
+<section id="slicing-in-3d" class="slide level2">
+<h2>Slicing in 3D</h2>
+<figure>
+<img src="images/med_slicing.png" />
+</figure>
+<aside class="notes">
+Slicing comes from the medical community which is well-versed in using them talk about each pair of dimensions
+</aside>
+</section>
+
+<section id="hyperslice" class="slide level2">
+<h2>Hyperslice</h2>
+<figure>
+<img src="images/hs_3d.png" />
+</figure>
+<p><span class="citation" data-cites="Wijk:1993">Wijk, Jarke J. van, and Robert van Liere. “HyperSlice: Visualization of scalar functions of many variables,” Proceedings of the 4th conference on visualization. 1993.</span></p>
+<aside class="notes">
+HyperSlice extended this to abstract objects
+</aside>
+</section>
+
+<section id="hyperslice-1" class="slide level2">
+<h2>Hyperslice</h2>
+<div class="columns">
+  <div class="column">
+<figure>
+<img src="images/hs_4dfunction.png" />
+</figure>
+  </div>
+  <div class="column">
+<figure>
+<img src="images/hs_nd.png" />
+</figure>
+<p><span class="citation" data-cites="Wijk:1993">Wijk, Jarke J. van, and Robert van Liere. “HyperSlice: Visualization of scalar functions of many variables,” Proceedings of the 4th conference on visualization. 1993.</span></p>
+  </div>
+</div>
+</section>
+
+<section id="outline-of-the-thesis" class="slide level2">
+<h2>Outline of the thesis</h2>
+<ol type="1">
+<li>Motivation</li>
+<li>1D slices: Sliceplorer <span class="citation" data-cites="Torsney-Weir:2017a">Torsney-Weir, Thomas, Michael Sedlmair, and Torsten Möller. “Sliceplorer: 1D slices for multi-dimensional continuous functions,” Computer Graphics Forum. 2017.</span></li>
+<li>2D slices: HyperSliceplorer <span class="citation" data-cites="Torsney-Weir:2018">Torsney-Weir, Thomas, Torsten Möller, Michael Sedlmair, and R. Mike Kirby. “Hypersliceplorer: Interactive visualization of shapes in multiple dimensions,” Computer Graphics Forum. 2018.</span></li>
+<li>Rendering time <span class="citation" data-cites="Torsney-Weir:2017">Torsney-Weir, Thomas, Steven Bergner, Derek Bingham, and Torsten Möller. “Predicting the interactive rendering time threshold of Gaussian process models with HyperSlice,” IEEE Transactions on Visualization and Computer Graphics. 2017.</span></li>
+<li>Conclusion</li>
+</ol>
+<aside class="notes">
+<p>Here is how my thesis was organized and I also list the papers that each chapter is based on</p>
+</aside>
+</section>
+<section id="outline-for-the-talk" class="slide level2">
+<h2>Outline for the talk</h2>
+<ul>
+<li>Continuous multi-D tasks</li>
+<li>Computing slices</li>
+<li>Projections of slices</li>
+<li>The future</li>
+</ul>
+<aside class="notes">
+<p>But for the talk, I want to highlight some of the key developments in slicing that I developed</p>
+</aside>
+</section>
+<section><section id="continuous-multi-d-tasks" class="titleslide slide level1"><h1>Continuous multi-D tasks</h1></section><section class="slide level2">
+
+<p>Section 2.4 of the thesis</p>
+<h3 id="outline">Outline</h3>
+<ul>
+<li><strong>Continuous multi-D tasks</strong></li>
+<li>Computing slices</li>
+<li>Projections of slices</li>
+<li>The future</li>
+</ul>
+</section><section id="benefits-of-tasks" class="slide level2">
+<h2>Benefits of tasks</h2>
+<ul>
+<li>Give a basis for evaluation</li>
+<li>Allow us to identify gaps</li>
+<li>Help designer to create effective visualizations</li>
+</ul>
+</section><section id="discrete-data" class="slide level2">
+<h2>Discrete data</h2>
+<p>Many task hierarchies for discrete data</p>
+<table>
+<tr>
+<td>
+Amar, Eagan, and Stasko
+</td>
+<td>
+Low-level components of analytic activity in information visualization
+</td>
+<td>
+2005
+</td>
+</tr>
+<tr>
+<td>
+Shneiderman
+</td>
+<td>
+The eyes have it: A task taxonomy for information visualizations
+</td>
+<td>
+1996
+</td>
+</tr>
+<tr>
+<td>
+Brehmer and Munzner
+</td>
+<td>
+A multi-level typology of abstract visualization tasks
+</td>
+<td>
+2013
+</td>
+</tr>
+</table>
+<aside class="notes">
+There are none for continuous data! These task taxonomies focus on single point picking or sets of points, not a continuous transition
+</aside>
+</section><section id="developing-the-taxonomy" class="slide level2">
+<h2>Developing the taxonomy</h2>
+<ol type="1">
+<li>Select an existing taxonomy (<span class="citation" data-cites="Amar:2005">Amar, Robert, James Eagan, and John T. Stasko. “Low-level components of analytic activity in information visualization,” IEEE symposium on information visualization (infovis). 2005.</span>)</li>
+<li>Consider how each element changes with multi-dimensional data</li>
+<li>Use this for comparing visualization techniques</li>
+<li>Refine the taxonomy with new datasets/applications</li>
+</ol>
+<p>This is just the start!</p>
+<aside class="notes">
+The idea is for this taxonomy to be continuously refined as new datasets and domain examples emerge
+</aside>
+</section><section id="taxonomy" class="slide level2">
+<h2>Taxonomy</h2>
+<figure>
+<img src="/images/task_taxonomy.png" />
+</figure>
+<aside class="notes">
+<p>The task &quot;sort&quot; didn't have a clear analog to the continuous world</p>
+Explain the table, techniques, colors, where they come from
+</aside>
+</section><section id="example-1-find-extremum" class="slide level2">
+<h2>Example 1: Find extremum</h2>
+<div class="columns">
+<div class="column">
+<h3>
+Discrete
+</h3>
+<p style="font-size: small; text-align: center;">
+&quot;Find data cases possessing an extreme value of an attribute over its range within the data set&quot;
+</p>
+<figure>
+<img src="images/extremum_discrete.png" />
+</figure>
+</div>
+<div class="column">
+<h3>
+Continuous
+</h3>
+<p style="font-size: small; text-align: center;">
+Find local/global minima/maxima
+</p>
+<figure>
+<img src="images/extremum_continuous.png" />
+</figure>
+</div>
+</div>
+</section><section id="find-extremum" class="slide level2">
+<h2>Find extremum</h2>
+<figure>
+<img src="images/gerber_extremum.png" />
+</figure>
+<p><span class="citation" data-cites="Gerber:2010">Gerber, Samuel, Peer-Timo Bremer, Valerio Pascucci, and Ross Whitaker. “Visual exploration of high dimensional scalar functions,” IEEE Transactions on Visualization and Computer Graphics. 2010.</span></p>
+</section><section id="find-extremum-1" class="slide level2">
+<h2>Find extremum</h2>
+<figure>
+<img src="images/sp_extremum.png" />
+</figure>
+</section><section id="example-2-characterize-distribution" class="slide level2">
+<h2>Example 2: Characterize distribution</h2>
+<div class="columns">
+<div class="column">
+<h3>
+Discrete
+</h3>
+<p style="font-size: small; text-align: center;">
+&quot;Given a set of data cases and a quantitative attribute of interest, characterize the distribution of that attribute's values over the set&quot;
+</p>
+<figure>
+<img src="images/dist_discrete.png" />
+</figure>
+</div>
+<div class="column">
+<h3>
+Continuous
+</h3>
+<p style="font-size: small; text-align: center;">
+What shapes do the manifolds have?
+</p>
+<figure>
+<img src="images/dist_continuous.png" />
+</figure>
+</div>
+</div>
+</section><section id="characterize-distribution" class="slide level2">
+<h2>Characterize distribution</h2>
+<figure>
+<img src="images/distribution_hs.png" />
+</figure>
+<p><span class="citation" data-cites="Wijk:1993">Wijk, Jarke J. van, and Robert van Liere. “HyperSlice: Visualization of scalar functions of many variables,” Proceedings of the 4th conference on visualization. 1993.</span></p>
+</section><section id="characterize-distribution-1" class="slide level2">
+<h2>Characterize distribution</h2>
+<figure>
+<img src="images/distribution_hs2.png" />
+</figure>
+</section><section id="characterize-distribution-2" class="slide level2">
+<h2>Characterize distribution</h2>
+<figure>
+<img src="images/distribution_sp.png" />
+</figure>
+</section><section id="characterize-distribution-3" class="slide level2">
+<h2>Characterize distribution</h2>
+<figure>
+<img src="images/distribution_sp2.png" />
+</figure>
+</section></section>
+<section><section id="computing-slices" class="titleslide slide level1"><h1>Computing slices</h1></section><section class="slide level2">
+
+<p>Sections 3.3 and 4.4 of the thesis</p>
+<h3 id="outline-1">Outline</h3>
+<ul>
+<li>Continuous multi-D tasks</li>
+<li><strong>Computing slices</strong></li>
+<li>Projections of slices</li>
+<li>The future</li>
+</ul>
+</section>
+
+<section id="dataset-types" class="slide level2">
+<h2>Dataset types</h2>
+<ul>
+<li><strong>Functional description</strong></li>
+<li><strong>Simplical mesh</strong></li>
+<li>Volume</li>
+</ul>
+<aside class="notes">
+<p>These are the 2 ways we can be given a continuous dataset, either as a function with multiple parameters or as a multi-D isosurface. I haven't studied multi-D volumes yet but we'd extract isosurfaces anyway.</p>
+Let's look at these in turn
+</aside>
+</section>
+
+<section id="functional-description" class="slide level2">
+<h2>Functional description</h2>
+<p style="text-align: center;"><span style="font-size: 36px;" class="math inline">\(f(x_1, x_2, x_3, x_4, x_5) \rightarrow y\)</span></p>
+<p style="text-align: center;"><span style="font-size: 36px;" class="math inline">\(f(x_1, 0.2, 0.5, 1.2, 17.8) \rightarrow y\)</span></p>
+<figure>
+<img style="height: 400px;" src="images/1d_function.png" />
+</figure>
+</section>
+
+<section id="functional-description-1" class="slide level2">
+<h2>Functional description</h2>
+<figure>
+<img src="images/2_slicing.png" />
+</figure>
+</section>
+
+<section id="doing-this-fast" class="slide level2">
+<h2>Doing this fast</h2>
+<div class="columns">
+<div class="column">
+<h3>
+3fps
+</h3>
+<video controls>
+<source src="movies/3fps_slicing.mov">
+</video>
+</div>
+<div class="column">
+<h3>
+30fps
+</h3>
+<video controls>
+<source src="movies/30fps_slicing.mov">
+</video>
+</div>
+</div>
+<aside class="notes">
+The idea is that if we know the functional form then we can speed up the rendering process.
+</aside>
+</section>
+
+<section id="doing-this-fast-1" class="slide level2">
+<h2>Doing this fast</h2>
+<figure>
+<img src="images/fast_gp1.png" />
+</figure>
+</section>
+
+<section id="doing-this-fast-2" class="slide level2">
+<h2>Doing this fast</h2>
+<div class="columns">
+<div class="column">
+<ol>
+<li>
+Filter out all points that don't fall in range of the slice
+</li>
+<li>
+Render the portion of the spherical kernel that is sliced
+</li>
+</ol>
+</div>
+<div class="column">
+<figure>
+<img src="images/fast_gp2.png" />
+</figure>
+</div>
+</div>
+</section><section id="doing-this-fast-3" class="slide level2">
+<h2>Doing this fast</h2>
+<figure>
+<img src="images/rendering_time_table.png" />
+</figure>
+</section><section id="doing-this-fast-4" class="slide level2">
+<h2>Doing this fast</h2>
+<figure>
+<img src="images/gpu_pipeline.png" />
+</figure>
+</section><section id="results" class="slide level2">
+<h2>Results</h2>
+<figure>
+<img src="images/timing_prediction.png" />
+</figure>
+</section><section id="simplical-mesh" class="slide level2">
+<h2>Simplical mesh</h2>
+<div class="columns">
+<div class="column">
+<p><img src="images/mesh-slicing.png" /></p>
+</div>
+<div class="column">
+<p><img src="images/simplex-slicing.png" /></p>
+</div>
+<div class="column">
+<p><img src="images/plane-slicing.png" /></p>
+</div>
+</div>
+<aside class="notes">
+Describe the outline of the algorithm
+</aside>
+</section><section id="simplical-mesh-1" class="slide level2">
+<h2>Simplical mesh</h2>
+<figure>
+<img src="images/simplex_fp1.png" />
+</figure>
+</section><section id="simplical-mesh-2" class="slide level2">
+<h2>Simplical mesh</h2>
+<figure>
+<img src="images/simplex_fp2.png" />
+</figure>
+</section></section>
+<section><section id="projections-of-slices" class="titleslide slide level1"><h1>Projections of slices</h1></section><section class="slide level2">
+
+<p>Sections 2.3.3 and 3.3 of the thesis</p>
+<h3 id="outline-2">Outline</h3>
+<ul>
+<li>Continuous multi-D tasks</li>
+<li>Computing slices</li>
+<li><strong>Projections of slices</strong></li>
+<li>The future</li>
+</ul>
+</section>
+
+<section id="how-to-choose-the-focus-point" class="slide level2">
+<h2>How to choose the focus point?</h2>
+<p style="text-align: center;">Let the user interact</p>
+
+<video style="margin: 0 auto;" controls>
+<source src="movies/30fps_slicing.mov">
+</video>
+
+<aside class="notes">
+The problem is that this is a local view and the user can get easily lost!
+</aside>
+</section>
+
+<section id="focus-point-sampling" class="slide level2">
+<h2>Focus point sampling</h2>
+<figure>
+<img src="images/sample_slicing.png" />
+</figure>
+</section>
+
+<section id="interactive-viewers" class="slide level2">
+<h2>Interactive viewers</h2>
+<ul>
+<li>Linked highlighting</li>
+<li>Individual slice selection</li>
+<li>Manually adding additional slices</li>
+</ul>
+</section><section id="linked-highlighting" class="slide level2">
+<h2>Linked highlighting</h2>
+<div class="columns">
+<div class="column">
+<figure>
+<img src="images/sp_linked.png" />
+</figure>
+</div>
+<div class="column">
+<video controls>
+<source src="movies/hsp_interaction.mov">
+</video>
+</div>
+</div>
+</section><section id="individual-slice-selection" class="slide level2">
+<h2>Individual slice selection</h2>
+<video controls>
+<source src="movies/hsplorer_video.mp4#t=45">
+</video>
+<aside class="notes">
+If we click on a particular slice we can switch to a local view. The user can also add additional points
+</aside>
+</section>
+</section>
+
+<section><section id="the-future" class="titleslide slide level1"><h1>The future</h1></section><section class="slide level2">
+
+<p>Sections 5.1 and 5.2 of the thesis</p>
+<h3 id="outline-3">Outline</h3>
+<ul>
+<li>Continuous multi-D tasks</li>
+<li>Computing slices</li>
+<li>Projections of slices</li>
+<li><strong>The future</strong></li>
+</ul>
+</section><section id="where-do-we-go-from-here" class="slide level2">
+<h2>Where do we go from here?</h2>
+<ul>
+<li>Dissemination of results</li>
+<li>Developing more applications</li>
+</ul>
+</section><section id="dissemination-of-results" class="slide level2">
+<h2>Dissemination of results</h2>
+<ul>
+<li>Slicing library for Python, R, etc</li>
+<li>Example using different datasets and techniques</li>
+<li>Released as open source</li>
+</ul>
+
+<aside class="notes">
+  Idea is to put sliceplorer, hypersliceplorer, and hyperslice all in one library
+</aside>
+</section>
+
+<section id="more-applications" class="slide level2">
+<h2>More applications</h2>
+<ul>
+<li>Design studies to understand domain tasks</li>
+<li>Refine task taxonomy</li>
+<li>Identify where slices do/don't help</li>
+</ul>
+</section></section>
+<section><section id="conclusion" class="titleslide slide level1"><h1>Conclusion</h1></section><section id="outline-for-the-talk-1" class="slide level2">
+<h2>Outline for the talk</h2>
+<ul>
+<li>Multi-D spaces and slices</li>
+<li>Continuous multi-D tasks</li>
+<li>Computing slices</li>
+<li>Projections of slices</li>
+<li>The future</li>
+</ul>
+</section><section id="thank-you" class="slide level2">
+<h2>Thank you!</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>
+Torsten Möller
+</li>
+<li>
+Michael Sedlmair
+</li>
+<li>
+VDA group
+</li>
+<li>
+Admin staff
+</li>
+<li>
+Friends and family
+</li>
+<li>
+Doggies!
+</li>
+</ul>
+</div>
+<div class="column">
+<figure>
+<img src="/images/doggies.jpg" />
+</figure>
+</div>
+</div>
+</section></section>
+<section><section id="extra-slides" class="titleslide slide level1"><h1>Extra slides</h1></section><section id="power-management" class="slide level2">
+<h2>Power management</h2>
+<div class="columns">
+<div class="column">
+<figure>
+<img src="images/no_pm_running.png" />
+</figure>
+</div>
+<div class="column">
+<figure>
+<img src="images/pm_running.png" />
+</figure>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        slideNumber: 'c/t',
+        controls: true,
+        progress: false,
+        history: true,
+        center: false,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

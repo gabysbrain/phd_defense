@@ -11,8 +11,8 @@ PANDOC := pandoc
 all: theme.css slides.html
 
 slides.html: slides.md template-revealjs.html
-	#$(PANDOC) -t revealjs \
-	$(PANDOC) -t html5 --template=template-revealjs.html --section-divs \
+	#$(PANDOC) -t html5 --template=template-revealjs.html --section-divs \
+	$(PANDOC) -t revealjs \
 	  --standalone \
 		--mathjax \
     --filter pandoc-citeproc --csl inline.csl \
